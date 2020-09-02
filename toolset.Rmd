@@ -1,0 +1,47 @@
+---
+title: "Toolset"
+output:
+  html_document:
+    toc: true  
+    toc_float: true
+    fig_width: 1
+---
+
+
+<style type="text/css">
+.leaflet .legend i{
+	border-radius: 50%;
+	width: 10px;
+	height: 10px;
+	margin-top: 4px;
+}
+</style>
+
+
+----
+
+Intro text.
+
+----
+
+
+## Accessing data
+
+
+----
+
+
+## Water quality assessment
+
+----
+
+
+## Integrated data analysis
+
+----
+
+
+## Communication
+
+----
+

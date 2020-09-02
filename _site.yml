@@ -1,0 +1,15 @@
+name: "IR Project Page"
+navbar:
+  title: "About"
+  left:
+    - text: "Problem statement"
+      href: prob-stat.html
+    - text: "Toolset"
+      href: toolset.html
+    - text: "By the numbers"
+      href: nums.html
+output_dir: "."
+output:
+  html_document:
+    theme: default
+    highlight: textmate
