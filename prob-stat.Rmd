@@ -8,10 +8,34 @@ output:
 ---
 
 ----
-Reserved for problem statement text
+
+## Introduction
+
+Big data. It’s the buzz word. It’s something we recognize as important to driving and creating trust in our decision making process. We generate data quickly and in significant amounts, 
+but it’s complicated — and quickly overwhelming. In 2017 the Harvard Business Review reported that:
+
+- “…less than half of an organization’s structured data is actively used in decision making…
+- 80% of an analyst’s time is spent discovering and preparing data, and …
+- An [organization’s] technology often isn’t up to the demands put on it …”  
+
+As a team who uses “all readily available and credible data” throughout the state, navigating and solving the challenges of working with big datasets from 
+disparate data sources is something we continuously have to navigate. Through the Department’s first continuous improvement efforts, the Integrated Report’s (IR) Programming Team 
+worked on re-evaluating and -imagining how we use technology to visualize and overcome the challenges with big data. We set out to become more efficient, agile, and credible 
+in our decision making processes when reporting on the quality of the state’s surface waters. This summary discusses the challenges and successes from the IR team’s continuous 
+improvements efforts over the last three years.
+
 ----
 
+## Challenges
 
+* 855 assessment units
+* 622 use geographic use assignments
+* Over 1000 unique criteria
+	+ Site specific
+	+ Temoprally specific
+
+
+----
 
 
 

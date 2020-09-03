@@ -7,6 +7,13 @@ output:
     fig_width: 1
 ---
 
+The 2018/2020 Combined IR served as the first large scale test of the tools that the IR programming team has been developed.
+
+The Draft Combined 2018/2020 IR assessed ___________ assessment units (AUs), accounting for ________ stream miles, and __________lake acres. The water quality assessment data cover the 
+period between October 1, 2010 and September 30, 2018 and include updates from previous reports along with a survey of the water quality of surface waters 
+in the state from 2008 to 2016. The data used in the report were collected by DWQ, _________agencies, and numerous public and private stakeholder groups and individuals.
+
+
 
 
 
