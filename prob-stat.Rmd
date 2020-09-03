@@ -28,12 +28,84 @@ improvements efforts over the last three years.
 
 ## Challenges
 
+### Large scope
+
 * 855 assessment units
 * 622 use geographic use assignments
-* Over 1000 unique criteria
+* `>`1000 unique criteria
 	+ Site specific
 	+ Temoprally specific
+<br>
 
+### Harmonizing datasets
+
+**Multiple data sources**  
+1. Internal data  
+2. Partner agencies  
+3. Stakeholders  
+<br>
+
+**Interpretation and analysis issues:**  
+1. Field & lab methods  
+2. Parameters  
+3. Site types 
+<br>
+
+### Batching assessments
+**Previous approaches:**  
+
+* Site by site  
+* Parameter by paramter  
+* Criterion by criterion  
+
+<br>
+
+### Digitizing criteria & uses
+#### Water quality criteria
+Water quality criteria are stored in mixed format text tables online. These criteria must be digitized and reformatted to a criterion database, including essential temporal and spatial metadata, 
+to link criteria and data automatically.
+<h5>[Utah water quality standards](https://rules.utah.gov/publicat/code/r317/r317-002.htm){target="_blank"}</h5>  
+<br>
+<br>
+
+```{r, echo=F, out.width="100%", fig.cap="Native web format of [Utah water quality criteria](https://rules.utah.gov/publicat/code/r317/r317-002.htm){target='_blank'}."}
+knitr::include_graphics('images/crit-table-web.png')
+```
+<br>
+
+```{r, echo=F, out.width="100%", fig.cap="Flattened database format of Utah water quality criteria."}
+knitr::include_graphics('images/crit-table-digital.png')
+```
+<br>
+
+
+#### Temporal & spatial components
+Text format geographical beneficial use descriptions and site specific criteria needed to be digitized into geographical polygons to allow automatic assignment of uses and criteria 
+to water quality monitoring locations.
+
+```{r, echo=F, out.width="100%", fig.cap="Beneficial uses and site specific criteria polygons for Utah."}
+library(leaflet)
+wqTools::buildMap() %>% showGroup('Beneficial uses') %>% showGroup('Site-specific standards')
+```
+
+<br>
+
+### Other issues
+
+* Documentation  
+* Communicating results  
+* Treadmill timeline  
+* Technical deficit  
+
+----
+
+## Opportunities
+
+1. Data in one usable format, connected to criteria and spatial and temporal metadata  
+2. Significant resources focused on a uniform set of issues  
+3. Build credibility and trust  
+4. Multipurpose tools  
+5. Understanding higher level information  
 
 ----
 

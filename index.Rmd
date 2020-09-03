@@ -20,9 +20,9 @@ Reserved for about text
 ----
 
 # Contacts
-Emilie Flemer: eflemer@utah.gov
-Elise Hinman: ehinman@utah.gov
-Jake Vander Laan: jvander@utah.gov
+Emilie Flemer: eflemer@utah.gov  
+Elise Hinman: ehinman@utah.gov  
+Jake Vander Laan: jvander@utah.gov  
 
 ----
 
