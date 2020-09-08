@@ -50,6 +50,7 @@ improvements efforts over the last three years.
 2. Parameters  
 3. Site types 
 <br>
+<br>
 
 ### Batching assessments
 **Previous approaches:**  
@@ -86,6 +87,14 @@ to water quality monitoring locations.
 ```{r, echo=F, out.width="100%", fig.cap="Beneficial uses and site specific criteria polygons for Utah."}
 library(leaflet)
 wqTools::buildMap() %>% showGroup('Beneficial uses') %>% showGroup('Site-specific standards')
+```
+<br>
+
+#### Formula derived criteria
+Several criteria are sample specific, depending on other factors at the time of sampling like hardness, pH, or temperature. These formulas needed to be stored along with the criteria and automatically calculated for each 
+applicable sample. 
+```{r, echo=F, out.width="100%", fig.cap="Hardness corrected criteria."}
+knitr::include_url("https://bookdown.org/jakevl/hardness-dep-crit/hardness_dep_crit.html")
 ```
 
 <br>
