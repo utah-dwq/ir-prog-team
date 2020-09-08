@@ -7,8 +7,92 @@ output:
     fig_width: 1
 ---
 
-The 2018/2020 Combined IR served as the first large scale test of the tools that the IR programming team has been developed.
+The 2018/2020 Combined IR served as the first large scale test of the tools that the IR programming team has been developed. We knew we were in for a big data challenge...but exactly how big was it?
 
+Our query of EPA's Water Quality Portal for the IR period of record pulled up 1,362,335 data records (that's more records than there are people in the Salt Lake Valley) from 3,237 monitoring locations throughout the state. However, DWQ did not collect the data alone: we reviewed and assessed data records from 17 different organizations. The map below shows all of the assessment units throughout the state (in purple) for which data were collected and assessed for the 2018/2020 IR.
+
+```{r, echo = F}
+# aus = unique(prelim_asmnts$ASSESS_ID)
+# aus_mapdat = subset(au_poly, au_poly$ASSESS_ID%in%aus)
+# save(aus_mapdat, file = "aus_mapdat.RData")
+library(tidyverse)
+library(leaflet)
+load("figures/aus_mapdat.Rdata")
+
+map=leaflet()%>%
+	addWMSTiles("https://basemap.nationalmap.gov/arcgis/services/USGSTopo/MapServer/WmsServer", group = "USGS topo", options = providerTileOptions(updateWhenZooming = FALSE,updateWhenIdle = TRUE), layers = "0") %>%
+	addWMSTiles("https://basemap.nationalmap.gov/arcgis/services/USGSHydroCached/MapServer/WmsServer", group = "Hydrography", options = providerTileOptions(updateWhenZooming = FALSE,updateWhenIdle = TRUE), layers = "0") %>%
+	addProviderTiles("Esri.WorldImagery", group = "Satellite", options = providerTileOptions(updateWhenZooming = FALSE,updateWhenIdle = TRUE)) %>%
+	addProviderTiles("Esri.WorldTopoMap", group = "World topo", options = providerTileOptions(updateWhenZooming = FALSE,updateWhenIdle = TRUE)) %>%
+	addMapPane("underlay_polygons", zIndex = 410) %>%
+	addMapPane("au_poly", zIndex = 415)  %>%
+	addMapPane("markers", zIndex = 420)  %>%
+	addPolygons(data=wqTools::bu_poly,group="Beneficial uses",smoothFactor=2,fillOpacity = 0.1,weight=3,color="green", options = pathOptions(pane = "underlay_polygons"),
+		popup=paste0(
+			"Description: ", wqTools::bu_poly$R317Descrp,
+			"<br> Uses: ", wqTools::bu_poly$bu_class)
+	) %>% 
+	addPolygons(data=aus_mapdat,group="Assessment units",smoothFactor=1,fillOpacity = 0.4,weight=2,color="purple", options = pathOptions(pane = "au_poly"),
+		popup=paste0(
+			"AU name: ", aus_mapdat$AU_NAME,
+			"<br> AU ID: ", aus_mapdat$ASSESS_ID,
+			"<br> AU type: ", aus_mapdat$AU_Type)
+	) %>% 
+	addPolygons(data=wqTools::ss_poly,group="Site-specific standards",smoothFactor=2,fillOpacity = 0.1,weight=3,color="blue", options = pathOptions(pane = "underlay_polygons"),
+		popup=paste0("SS std: ", wqTools::ss_poly$SiteSpecif)
+	) %>%
+	addPolygons(data=wqTools::wmu_poly,group="Watershed management units",smoothFactor=2,fillOpacity = 0.1,weight=3,color="red", options = pathOptions(pane = "underlay_polygons"),
+		popup=wqTools::wmu_poly$Mgmt_Unit
+	) %>%
+	addPolygons(data=wqTools::ut_poly,group="UT boundary",smoothFactor=2,fillOpacity = 0.1,weight=3,color="orange", options = pathOptions(pane = "underlay_polygons")) %>%
+	hideGroup("Site-specific standards") %>%
+	hideGroup("Beneficial uses") %>%
+	hideGroup("UT boundary") %>%
+	hideGroup("Watershed management units")
+
+map=leaflet::addLayersControl(map,
+			position ="topleft",
+			baseGroups = c("World topo","USGS topo", "Hydrography", "Satellite"),overlayGroups = c("Assessment units","Beneficial uses", "Site-specific standards", "Watershed management units", "UT boundary"),
+			options = leaflet::layersControlOptions(collapsed = TRUE, autoZIndex=FALSE))
+map
+```
+
+However, the 1.36 million records do not pass through the assessment without rigorous screening and checks. They are screened to include only assessed sites, detection limits, parameters, units, fractions, and sufficient associated metadata. These data are also aggregated to a representative value for comparison to water quality standards. In fact, the majority of the thousands of lines of code written to run the IR are used to screen and prep the core dataset for assessment. The plot below shows how the data records whittle down to the data that meet the minimum data requirements.
+
+```{r, echo = F}
+# start with 1362335
+# then, 11148 removed from secondary reviews
+# then 707060 screened out
+# then, 171634 rejected in dataprep
+# 51361 did not have criteria
+library(plotly)
+dat = data.frame("Programming Step" = c("Original Count","Screened","Post-Data Prep","Post-Secondary Review", "Core Dataset"),"Record Count" = c(1362335, 603914, 432280, 396999, 348003))
+dat$Programming.Step = factor(dat$Programming.Step, levels = c("Original Count","Screened","Post-Data Prep","Post-Secondary Review", "Core Dataset"))
+
+barp = plot_ly(dat, x = ~Programming.Step, y = ~Record.Count, name = "IR Data Review Process", type = "bar")%>%
+  layout(title = 'IR Data Review Process', font=list(size = 20)) %>%
+  layout(xaxis = list(title = 'Programming Step'), yaxis = list(title = 'Record Count')) %>%
+  layout( xaxis = list(titlefont = list(size = 22), tickfont = list(size = 22)),
+          yaxis = list(titlefont = list(size = 22), tickfont = list(size = 22)) )
+
+barp
+```
+
+Nearly 4,000 different water quality parameters were filtered down to a core set of just over 100. From these data, we performed 61,388 unique assessments by site, use, parameter, and criterion. The word map below shows the frequency of assessments associated with each parameter.
+
+```{r}
+library(wordcloud)
+# aggreg = prelim_asmnts%>%group_by(R3172ParameterName)%>%summarise(Ncount = length(IR_Cat))
+# aggreg$R3172ParameterName[aggreg$R3172ParameterName=="Total Ammonia as N"] = "Ammonia"
+# save(aggreg, file = "figures/wordcloud.RData")
+load("figures/wordcloud.RData")
+wordcloud::wordcloud(words = aggreg$R3172ParameterName, freq = aggreg$Ncount, min.freq = 1,
+                     max.words=200, random.order=FALSE, rot.per=0.35, 
+                     colors=brewer.pal(4, "Dark2"))
+```
+
+
+ 
 The Draft Combined 2018/2020 IR assessed ___________ assessment units (AUs), accounting for ________ stream miles, and __________lake acres. The water quality assessment data cover the 
 period between October 1, 2010 and September 30, 2018 and include updates from previous reports along with a survey of the water quality of surface waters 
 in the state from 2008 to 2016. The data used in the report were collected by DWQ, _________agencies, and numerous public and private stakeholder groups and individuals.
