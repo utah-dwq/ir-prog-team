@@ -42,7 +42,8 @@ knitr::include_graphics("images/findSites.png")
 
 ## Water quality assessment
 Water quality assessment was the driving motivation for the development of this suite of tools. UDWQ is now using these tools for the purposes of completing water quality assessments and 
-generating [305(b) and 303(d) lists for the Integrated Report on water quality conditions in the state of Utah](){target="_blank"}. This suite of tools includes functions for screening water quality data 
+generating [305(b) and 303(d) lists for the Integrated Report on water quality conditions in the state of Utah](https://deq.utah.gov/legacy/programs/water-quality/monitoring-reporting/assessment/index.htm){target="_blank"}. 
+This suite of tools includes functions for screening water quality data 
 to ensure they meet minimum quality criteria and are applicable to water quality standards, assigning beneficial uses and water quality criteria, calculating formula derived criteria, identifying and counting 
 exceedances of water quality criteria, and assigning sites and assessment units to assessment categories as described in Utah Integrated Report methods. This toolset also includes interactive applications designed 
 to allow internal reviewers of the IR to analyze and visualize water quality data and assessments and provide interpretation and feedback to the IR team.
@@ -78,12 +79,16 @@ knitr::include_graphics("images/wqdd3.png") # update
 Extracting and analyzing water quality data is important, but effective communication of results to the public, stakeholders, and scientists is essential for making good water quality management decisions. As such, the IR programming team has 
 also been developing interacitve applications, documents, presentations, and pages (this one included) that let users interactive with and understand the data, analyses, and conclusions that DWQ scientists and engineers base water quality 
 management decisions on. This increases the transparency and accountability of DWQ scientists and engineers and can help generate understanding and buy in from the public and stakeholders. Communication tools derived from IR programming team 
-developments have included the [Utah Lake Data Explorer](){target="_blank"} and the [COVID-19 wastewater monitoring dashboard](){target="_blank"}. These types of tools are highly flexible and can be used as standalone applications or embedded 
-into other webpages for additional context.
+developments have included the [Utah Lake Data Explorer](https://udwq.shinyapps.io/UtahLakeDataExplorer/){target="_blank"} and the [COVID-19 wastewater monitoring dashboard](https://deq.utah.gov/water-quality/sars-cov-2-sewage-monitoring){target="_blank"}. 
+These types of tools are highly flexible and can be used as standalone applications or embedded into other webpages for additional context.
 <br>
 
 ```{r, fig.cap="Example figure interactively generated from the Utah Lake Data Explorer.", echo=F}
 knitr::include_graphics("images/utah-lake.png")
+```
+
+```{r, out.width="100%", fig.cap="Utah DWQ's COVID-19 wastewater monitoring dashboard.", echo=F}
+knitr::include_app("https://udwq.shinyapps.io/sarscov2_surv/", height="600px")
 ```
 
 
