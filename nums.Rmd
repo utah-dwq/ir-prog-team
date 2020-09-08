@@ -12,7 +12,7 @@ The 2018/2020 Combined IR served as the first large scale test of the tools that
 Our query of EPA's Water Quality Portal for the IR period of record pulled up 1,362,335 data records (that's more records than there are people in the Salt Lake Valley) from 3,237 monitoring locations throughout the state. 
 However, DWQ did not collect the data alone: we reviewed and assessed data records from 17 different organizations.  
 
-### Assessment units
+## Assessment units
 ```{r, echo = F, fig.show="hold", out.width="100%", fig.cap="Assessment units throughout the state (in purple) for which data were collected and assessed for the 2018/2020 IR."}
 # aus = unique(prelim_asmnts$ASSESS_ID)
 # aus_mapdat = subset(au_poly, au_poly$ASSESS_ID%in%aus)
@@ -59,7 +59,7 @@ map=leaflet::addLayersControl(map,
 map
 ```
 
-### Assessed records
+## Assessed records
 However, the 1.36 million records do not pass through the assessment without rigorous screening and checks. They are screened to include only assessed sites, detection limits, parameters, units, fractions, and sufficient associated metadata. 
 These data are also aggregated to a representative value for comparison to water quality standards. In fact, the majority of the thousands of lines of code written to run the IR are used to screen and prep the core dataset for assessment. 
 
@@ -82,7 +82,7 @@ barp = plot_ly(dat, x = ~Programming.Step, y = ~Record.Count, name = "IR Data Re
 barp
 ```
 
-### Assessed parameters
+## Assessed parameters
 
 Nearly 4,000 different water quality parameters were filtered down to a core set of just over 100. From these data, we performed 61,388 unique assessments by site, use, parameter, and criterion.  
 

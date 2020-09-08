@@ -8,14 +8,9 @@ output:
 
 ----
 
-Note this page is being actively drafted.
-
-
 # About this page
-Reserved for about text
-
-<br>
-<br>
+This page describes the challenges, process, and results of Utah's Integrated Report R programming project. The goal of this project was to increase the efficiency and repeatability of water quality assessments for the state of Utah. This page also 
+describes additional, more general tools that the team developed along the way.
 
 ----
 
