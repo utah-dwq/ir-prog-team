@@ -9,9 +9,11 @@ output:
 
 The 2018/2020 Combined IR served as the first large scale test of the tools that the IR programming team has been developed. We knew we were in for a big data challenge...but exactly how big was it?
 
-Our query of EPA's Water Quality Portal for the IR period of record pulled up 1,362,335 data records (that's more records than there are people in the Salt Lake Valley) from 3,237 monitoring locations throughout the state. However, DWQ did not collect the data alone: we reviewed and assessed data records from 17 different organizations. The map below shows all of the assessment units throughout the state (in purple) for which data were collected and assessed for the 2018/2020 IR.
+Our query of EPA's Water Quality Portal for the IR period of record pulled up 1,362,335 data records (that's more records than there are people in the Salt Lake Valley) from 3,237 monitoring locations throughout the state. 
+However, DWQ did not collect the data alone: we reviewed and assessed data records from 17 different organizations.  
 
-```{r, echo = F}
+### Assessment units
+```{r, echo = F, fig.show="hold", out.width="100%", fig.cap="Assessment units throughout the state (in purple) for which data were collected and assessed for the 2018/2020 IR."}
 # aus = unique(prelim_asmnts$ASSESS_ID)
 # aus_mapdat = subset(au_poly, au_poly$ASSESS_ID%in%aus)
 # save(aus_mapdat, file = "aus_mapdat.RData")
@@ -57,9 +59,11 @@ map=leaflet::addLayersControl(map,
 map
 ```
 
-However, the 1.36 million records do not pass through the assessment without rigorous screening and checks. They are screened to include only assessed sites, detection limits, parameters, units, fractions, and sufficient associated metadata. These data are also aggregated to a representative value for comparison to water quality standards. In fact, the majority of the thousands of lines of code written to run the IR are used to screen and prep the core dataset for assessment. The plot below shows how the data records whittle down to the data that meet the minimum data requirements.
+### Assessed records
+However, the 1.36 million records do not pass through the assessment without rigorous screening and checks. They are screened to include only assessed sites, detection limits, parameters, units, fractions, and sufficient associated metadata. 
+These data are also aggregated to a representative value for comparison to water quality standards. In fact, the majority of the thousands of lines of code written to run the IR are used to screen and prep the core dataset for assessment. 
 
-```{r, echo = F}
+```{r, nums-barplot, echo = F, fig.show="hold", out.width="100%", fig.cap="Assessment data review process summary showing how the data records whittle down to those that meet the minimum data requirements."}
 # start with 1362335
 # then, 11148 removed from secondary reviews
 # then 707060 screened out
@@ -70,7 +74,7 @@ dat = data.frame("Programming Step" = c("Original Count","Screened","Post-Data P
 dat$Programming.Step = factor(dat$Programming.Step, levels = c("Original Count","Screened","Post-Data Prep","Post-Secondary Review", "Core Dataset"))
 
 barp = plot_ly(dat, x = ~Programming.Step, y = ~Record.Count, name = "IR Data Review Process", type = "bar")%>%
-  layout(title = 'IR Data Review Process', font=list(size = 20)) %>%
+  #layout(title = 'IR Data Review Process', font=list(size = 20)) %>%
   layout(xaxis = list(title = 'Programming Step'), yaxis = list(title = 'Record Count')) %>%
   layout( xaxis = list(titlefont = list(size = 22), tickfont = list(size = 22)),
           yaxis = list(titlefont = list(size = 22), tickfont = list(size = 22)) )
@@ -78,26 +82,22 @@ barp = plot_ly(dat, x = ~Programming.Step, y = ~Record.Count, name = "IR Data Re
 barp
 ```
 
-Nearly 4,000 different water quality parameters were filtered down to a core set of just over 100. From these data, we performed 61,388 unique assessments by site, use, parameter, and criterion. The word map below shows the frequency of assessments associated with each parameter.
+### Assessed parameters
 
-```{r}
-library(wordcloud)
-# aggreg = prelim_asmnts%>%group_by(R3172ParameterName)%>%summarise(Ncount = length(IR_Cat))
-# aggreg$R3172ParameterName[aggreg$R3172ParameterName=="Total Ammonia as N"] = "Ammonia"
-# save(aggreg, file = "figures/wordcloud.RData")
-load("figures/wordcloud.RData")
-wordcloud::wordcloud(words = aggreg$R3172ParameterName, freq = aggreg$Ncount, min.freq = 1,
-                     max.words=200, random.order=FALSE, rot.per=0.35, 
-                     colors=brewer.pal(4, "Dark2"))
+Nearly 4,000 different water quality parameters were filtered down to a core set of just over 100. From these data, we performed 61,388 unique assessments by site, use, parameter, and criterion.  
+
+```{r, nums-wordcloud, echo=F, fig.show="hold", out.width="100%", fig.cap="Frequency of assessments associated with each parameter."}
+#library(wordcloud)
+## aggreg = prelim_asmnts%>%group_by(R3172ParameterName)%>%summarise(Ncount = length(IR_Cat))
+## aggreg$R3172ParameterName[aggreg$R3172ParameterName=="Total Ammonia as N"] = "Ammonia"
+## save(aggreg, file = "figures/wordcloud.RData")
+#load("figures/wordcloud.RData")
+#png(filename="figures/wordcloud.png")
+#wordcloud::wordcloud(words = aggreg$R3172ParameterName, freq = aggreg$Ncount, min.freq = 1,
+#                     max.words=200, random.order=FALSE, rot.per=0.35, 
+#                     colors=brewer.pal(4, "Dark2"))
+#dev.off()
+knitr::include_graphics('figures/wordcloud.png', dpi=500)
 ```
-
-
- 
-The Draft Combined 2018/2020 IR assessed ___________ assessment units (AUs), accounting for ________ stream miles, and __________lake acres. The water quality assessment data cover the 
-period between October 1, 2010 and September 30, 2018 and include updates from previous reports along with a survey of the water quality of surface waters 
-in the state from 2008 to 2016. The data used in the report were collected by DWQ, _________agencies, and numerous public and private stakeholder groups and individuals.
-
-
-
 
 
