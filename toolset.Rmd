@@ -87,7 +87,7 @@ These types of tools are highly flexible and can be used as standalone applicati
 knitr::include_graphics("images/utah-lake.png")
 ```
 
-```{r, out.width="100%", fig.cap="Utah DWQ's COVID-19 wastewater monitoring dashboard.", echo=F}
+```{r, out.width="100%", fig.cap="Utah DWQ's COVID-19 wastewater monitoring dashboard.", echo=F, out.extra='style="border: none;"'}
 knitr::include_app("https://udwq.shinyapps.io/sarscov2_surv/", height="600px")
 ```
 

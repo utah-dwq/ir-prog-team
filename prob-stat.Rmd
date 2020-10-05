@@ -93,8 +93,8 @@ wqTools::buildMap() %>% showGroup('Beneficial uses') %>% showGroup('Site-specifi
 #### Formula derived criteria
 Several criteria are sample specific, depending on other factors at the time of sampling like hardness, pH, or temperature. These formulas needed to be stored along with the criteria and automatically calculated for each 
 applicable sample. 
-```{r, echo=F, out.width="100%", fig.cap="Hardness corrected criteria."}
-knitr::include_url("https://bookdown.org/jakevl/hardness-dep-crit/hardness_dep_crit.html")
+```{r, echo=F, out.width="100%", fig.cap="Hardness corrected criteria.", out.extra='style="border: none;"'}
+knitr::include_url("https://bookdown.org/jakevl/hardness-dep-crit/hardness_dep_crit.html", height="500px")
 ```
 
 <br>
