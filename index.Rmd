@@ -2,19 +2,34 @@
 title: "Integrated Report Programming Team Page"
 output:
   html_document:
-    toc: false  
+    toc: true  
+    toc_float: true
     fig_width: 1
 ---
 
 ----
 
-# About this page
+## About this page
 This page describes the challenges, process, and results of Utah's Integrated Report R programming project. The goal of this project was to increase the efficiency and repeatability of water quality assessments for the state of Utah. This page also 
 describes additional, more general tools that the team developed along the way.
 
 ----
 
-# Contacts
+## Integrated Report intro text
+
+----
+
+
+
+## Continuous Improvement intro text
+
+
+
+----
+
+
+
+## Contacts
 Emilie Flemer: eflemer@utah.gov  
 Elise Hinman: ehinman@utah.gov  
 Jake Vander Laan: jvander@utah.gov  
