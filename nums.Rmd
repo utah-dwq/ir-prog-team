@@ -106,7 +106,7 @@ knitr::include_graphics('figures/wordcloud.png', dpi=500)
 
 The map below shows the draft assessment results from the Combined 2018/2020 Integrated Report. Assessment units are colored according to their overall assessment category. Click on assessment units of interest to learn more about the assessment, impaired parameters, and TMDL information. Use the layers widget in the upper left to turn on and off assessment unit categories. The reset view icon (with four arrows pointing inward) will reset the map to the entire state of Utah. Use the search bar to search by assessment unit ID or name.
 
-```{r, echo = FALSE}
+``````{r, echo = F, fig.show="hold", out.width="100%", fig.cap="Draft AU assessments from the Combined 2018/2020 Integrated Report"}
 load("figures/au_asmnt_dat.Rdata")
 
 factpal <- colorFactor(c("#4daf4a","#377eb8","#ff7f00","#e41a1c","#984ea3","#6a6666"), unique(aup$AU_DWQCat1))
