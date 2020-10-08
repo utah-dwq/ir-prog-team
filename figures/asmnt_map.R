@@ -1,4 +1,12 @@
-load("figures/au_asmnt_dat.Rdata")
+setwd("C:\\Users\\jvander\\Documents\\R\\ir-prog-team\\figures")
+library(leaflet)
+
+load("au_asmnt_dat.Rdata")
+aup$AU_DWQCat1[aup$AU_NAME=="Willard Bay Reservoir"]="Fully Supporting"
+aup$lab[aup$AU_NAME=="Willard Bay Reservoir"]="<p>AU name: Willard Bay Reservoir<br />AU ID: UT-L-16020102-004_00<br />Assessment: Fully Supporting<br />Not Supporting Parameters: NA<br />Approved TMDL Parameters: NA<br />TMDL ID: NA"
+aup$AU_DWQCat1[aup$AU_NAME=="Monroe Creek"]="Fully Supporting"
+aup$lab[aup$AU_NAME=="Monroe Creek"]="<p>AU name: Monroe Creek<br />AU ID: UT16030003-013_00<br />Assessment: Fully Supporting<br />Not Supporting Parameters: NA<br />Approved TMDL Parameters: NA<br />TMDL ID: NA"
+
 
 factpal <- colorFactor(c("#4daf4a","#377eb8","#ff7f00","#e41a1c","#984ea3","#6a6666"), unique(aup$AU_DWQCat1))
 
