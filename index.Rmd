@@ -1,5 +1,5 @@
 ---
-title: "Integrated Report Programming Team Page"
+title: "Integrated Report:  Programming and Automation"
 output:
   html_document:
     toc: true  
@@ -9,25 +9,38 @@ output:
 
 ----
 
-## About this page
-This page describes the challenges, process, and results of Utah's Integrated Report R programming project. The goal of this project was to increase the efficiency and repeatability of water quality assessments for the state of Utah. This page also 
-describes additional, more general tools that the team developed along the way.
+## Overview
+
+This webpage describes the challenges, improvements to, and results from the Combined 2018/2020 Integrated Report (IR) programming project. The project goal was to increase the efficiency and repeatability of water quality assessments for the State of Utah.   
+
+The Combined 2018/2020 Integrated Report (IR) assesses the quality of the surface waters in the state and identifies waterbodies that are not meeting water quality standards. These standards support the designated beneficial uses that protect water quality for drinking water, recreation, aquatic life, and agriculture. Waterbodies that do not meet one or more of their beneficial uses are classified as impaired in the IR and placed on the Clean Water Act 303(d) list.   
+
+The IR supports DWQ‘s commitment to protecting and improving the water quality of Utah‘s flowing surface waters of the state, canals, lakes, reservoirs, and ponds by providing critical information and thorough analyses of water quality conditions, waterbody impairments, statewide trends, and emerging issues. DWQ uses these data to identify areas with impairments and prioritize projects, TMDLs, and best management practices (BMPs) to improve and enhance water quality in affected areas.   
+
+The Draft Combined 2018/2020 IR reports on 913 assessment units (AUs), over 82.5 thousand miles of flowing surface waters of the state and canals, and nearly 1.5 million lake, reservoir, and pond acres. The water quality assessment data cover the period between October 1, 2010 and September 30, 2018 and include updates to previous reports. The data used in the report were collected by DWQ and 12 other federal, state, and local agencies.
+
+
+----   
+
+
+## Continuous Improvement   
+
+DWQ is committed to continuous improvement to increase performance and implement innovations that advance quality, efficiency, and effectiveness. The Integrated Report (IR) team developed and implemented a number of process improvements for the Combined 2018/2020 IR that increased automation, accuracy, efficiency, and consistency. 
+
+* Data submission and retrieval
+  + All data were submitted through the online Call for Data form using DWQ and EPA Water Quality Exchange (WQX) templates. DWQ provided training workshops to assist those submitting data. Standardized data submissions to a central database reduced staff time spent consolidating and harmonizing data for the IR assessment process.   
+
+* R programming code
+  + The use of R, a free, open-source code, allowed programmers to automate data sorting, data screening, standard criteria assignments, identification of water quality exceedances, and roll up to assessment unit assessment categories from site-level assessments. Automation improved data analysis and review and reduced staff time spent organizing and consolidating data
+
+* Spatial review tools
+  + The team developed R Shiny applications that made it easier to review water quality data for assessment. The applications enabled staff to use a map to explore site-level data and gain a spatiotemporal understanding of water quality trends across the state.
+
+* Online forms  
+  + Qualtrics forms for the 303(d) Assessment Methods, Call for Data, and the Draft Combined 2018/2020 IR store and organize responses in a central location so DWQ may adequately review public comments and ensure all comments are addressed.   
+<br>
 
 ----
-
-## Integrated Report intro text
-
-----
-
-
-
-## Continuous Improvement intro text
-
-
-
-----
-
-
 
 ## Contacts
 Emilie Flemer: eflemer@utah.gov  

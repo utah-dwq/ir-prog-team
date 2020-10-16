@@ -12,8 +12,63 @@ The 2018/2020 Combined IR served as the first large scale test of the tools that
 Our query of EPA's Water Quality Portal for the IR period of record pulled up 1,362,335 data records (that's more records than there are people in the Salt Lake Valley) from 3,237 monitoring locations throughout the state. 
 However, DWQ did not collect the data alone: we reviewed and assessed data records from 17 different organizations.  
 
-## Assessment units
-```{r, echo = F, fig.show="hold", out.width="100%", fig.cap="Assessment units throughout the state (in purple) for which data were collected and assessed for the 2018/2020 IR."}
+----
+
+## Assessed records
+However, the 1.36 million records do not pass through the assessment without rigorous screening and checks. They are screened to include only assessed sites, detection limits, parameters, units, fractions, and sufficient associated metadata. 
+These data are also aggregated to a representative value for comparison to water quality standards. In fact, the majority of the thousands of lines of code written to run the IR are used to screen and prep the core dataset for assessment. 
+
+```{r, nums-barplot, echo = F, fig.show="hold", out.width="100%", fig.cap="Assessment data review process summary showing how the data records whittle down to those that meet the minimum data requirements."}
+# start with 1362335
+# then, 11148 removed from secondary reviews
+# then 707060 screened out
+# then, 171634 rejected in dataprep
+# 51361 did not have criteria
+library(plotly)
+dat = data.frame("Programming Step" = c("Original Count","Screened","Post-Data Prep","Post-Secondary Review", "Core Dataset"),"Record Count" = c(1362335, 603914, 432280, 396999, 348003))
+dat$Programming.Step = factor(dat$Programming.Step, levels = c("Original Count","Screened","Post-Data Prep","Post-Secondary Review", "Core Dataset"))
+
+barp = plot_ly(dat, x = ~Programming.Step, y = ~Record.Count, name = "IR Data Review Process", type = "bar")%>%
+  #layout(title = 'IR Data Review Process', font=list(size = 20)) %>%
+  layout(xaxis = list(title = 'Programming Step'), yaxis = list(title = 'Record Count')) %>%
+  layout( xaxis = list(titlefont = list(size = 22), tickfont = list(size = 22)),
+          yaxis = list(titlefont = list(size = 22), tickfont = list(size = 22)) )
+
+barp
+```
+
+----
+
+## 2018/2020 IR results
+
+The map below shows the draft assessment results from the Combined 2018/2020 Integrated Report. Assessment units are colored according to their overall assessment category. Click on assessment units of interest to learn more about the assessment, impaired parameters, and TMDL information. Use the layers widget in the upper left to turn on and off assessment unit categories. The reset view icon (with four arrows pointing inward) will reset the map to the entire state of Utah. Use the search bar to search by assessment unit ID or name.
+
+``````{r, echo = F, out.extra='style="border: none;"', out.width="100%", fig.cap="Draft AU assessments from the Combined 2018/2020 Integrated Report"}
+knitr::include_url("figures/asmnt_map.html", height="700px")
+```
+
+----
+
+## Assessed parameters
+
+Nearly 4,000 different water quality parameters were filtered down to a core set of just over 100. From these data, we performed 61,388 unique assessments by site, use, parameter, and criterion.  
+
+```{r, nums-wordcloud, echo=F, fig.show="hold", out.width="100%", fig.cap="Frequency of assessments associated with each parameter."}
+#library(wordcloud)
+## aggreg = prelim_asmnts%>%group_by(R3172ParameterName)%>%summarise(Ncount = length(IR_Cat))
+## aggreg$R3172ParameterName[aggreg$R3172ParameterName=="Total Ammonia as N"] = "Ammonia"
+## save(aggreg, file = "figures/wordcloud.RData")
+#load("figures/wordcloud.RData")
+#png(filename="figures/wordcloud.png")
+#wordcloud::wordcloud(words = aggreg$R3172ParameterName, freq = aggreg$Ncount, min.freq = 1,
+#                     max.words=200, random.order=FALSE, rot.per=0.35, 
+#                     colors=brewer.pal(4, "Dark2"))
+#dev.off()
+knitr::include_graphics('figures/wordcloud.png', dpi=500)
+```
+
+
+```{r, echo = F, eval = F, fig.show="hold", out.width="100%", fig.cap="Assessment units throughout the state (in purple) for which data were collected and assessed for the 2018/2020 IR."}
 # aus = unique(prelim_asmnts$ASSESS_ID)
 # aus_mapdat = subset(au_poly, au_poly$ASSESS_ID%in%aus)
 # save(aus_mapdat, file = "aus_mapdat.RData")
@@ -58,55 +113,3 @@ map=leaflet::addLayersControl(map,
 			options = leaflet::layersControlOptions(collapsed = TRUE, autoZIndex=FALSE))
 map
 ```
-
-## Assessed records
-However, the 1.36 million records do not pass through the assessment without rigorous screening and checks. They are screened to include only assessed sites, detection limits, parameters, units, fractions, and sufficient associated metadata. 
-These data are also aggregated to a representative value for comparison to water quality standards. In fact, the majority of the thousands of lines of code written to run the IR are used to screen and prep the core dataset for assessment. 
-
-```{r, nums-barplot, echo = F, fig.show="hold", out.width="100%", fig.cap="Assessment data review process summary showing how the data records whittle down to those that meet the minimum data requirements."}
-# start with 1362335
-# then, 11148 removed from secondary reviews
-# then 707060 screened out
-# then, 171634 rejected in dataprep
-# 51361 did not have criteria
-library(plotly)
-dat = data.frame("Programming Step" = c("Original Count","Screened","Post-Data Prep","Post-Secondary Review", "Core Dataset"),"Record Count" = c(1362335, 603914, 432280, 396999, 348003))
-dat$Programming.Step = factor(dat$Programming.Step, levels = c("Original Count","Screened","Post-Data Prep","Post-Secondary Review", "Core Dataset"))
-
-barp = plot_ly(dat, x = ~Programming.Step, y = ~Record.Count, name = "IR Data Review Process", type = "bar")%>%
-  #layout(title = 'IR Data Review Process', font=list(size = 20)) %>%
-  layout(xaxis = list(title = 'Programming Step'), yaxis = list(title = 'Record Count')) %>%
-  layout( xaxis = list(titlefont = list(size = 22), tickfont = list(size = 22)),
-          yaxis = list(titlefont = list(size = 22), tickfont = list(size = 22)) )
-
-barp
-```
-
-## Assessed parameters
-
-Nearly 4,000 different water quality parameters were filtered down to a core set of just over 100. From these data, we performed 61,388 unique assessments by site, use, parameter, and criterion.  
-
-```{r, nums-wordcloud, echo=F, fig.show="hold", out.width="100%", fig.cap="Frequency of assessments associated with each parameter."}
-#library(wordcloud)
-## aggreg = prelim_asmnts%>%group_by(R3172ParameterName)%>%summarise(Ncount = length(IR_Cat))
-## aggreg$R3172ParameterName[aggreg$R3172ParameterName=="Total Ammonia as N"] = "Ammonia"
-## save(aggreg, file = "figures/wordcloud.RData")
-#load("figures/wordcloud.RData")
-#png(filename="figures/wordcloud.png")
-#wordcloud::wordcloud(words = aggreg$R3172ParameterName, freq = aggreg$Ncount, min.freq = 1,
-#                     max.words=200, random.order=FALSE, rot.per=0.35, 
-#                     colors=brewer.pal(4, "Dark2"))
-#dev.off()
-knitr::include_graphics('figures/wordcloud.png', dpi=500)
-```
-
-
-
-## 2018/2020 IR results
-
-The map below shows the draft assessment results from the Combined 2018/2020 Integrated Report. Assessment units are colored according to their overall assessment category. Click on assessment units of interest to learn more about the assessment, impaired parameters, and TMDL information. Use the layers widget in the upper left to turn on and off assessment unit categories. The reset view icon (with four arrows pointing inward) will reset the map to the entire state of Utah. Use the search bar to search by assessment unit ID or name.
-
-``````{r, echo = F, out.extra='style="border: none;"', out.width="100%", fig.cap="Draft AU assessments from the Combined 2018/2020 Integrated Report"}
-knitr::include_url("figures/asmnt_map.html", height="700px")
-```
-
